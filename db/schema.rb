@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_03_000140) do
+ActiveRecord::Schema.define(version: 2020_03_03_124732) do
+
+  create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.string "online_or_offline"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "prefecture"
+    t.string "station"
+    t.index ["user_id"], name: "index_requests_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -20,4 +32,5 @@ ActiveRecord::Schema.define(version: 2020_03_03_000140) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "requests", "users"
 end

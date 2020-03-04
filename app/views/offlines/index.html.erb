@@ -1,0 +1,24 @@
+<h1>オフライン一覧</h1>
+<ul class="list-unstyled">
+  <% @requests.each do |req| %>
+    <li class="media mb-3">
+      <div class="media-body">
+        <div>
+          <%= req.user.name %> <span class="text-muted">posted at <%= req.created_at %></span>
+        </div>
+        <div>
+          タイトル：<%= req.title %>
+        </div>
+        <div>
+          県・市区：<%= req.prefecture %>
+        </div>
+        <div class="row">
+          <% if current_user == req.user %>
+            <%= link_to "Delete",req, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+          <% end %>
+          <%= link_to '詳細', request_path(id:req), class: 'btn btn-danger btn-sm' %>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>

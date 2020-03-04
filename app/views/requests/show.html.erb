@@ -1,0 +1,26 @@
+<ul class="list-unstyled">
+  <li class="media mb-3">
+    <div class="media-body">
+      <div>
+        <%= @request.user.name %> <span class="text-muted">posted at <%= @request.created_at %></span>
+      </div>
+      <div>
+        タイトル：<%= @request.title %>
+      </div>
+      <div>
+        県・市区：<%= @request.prefecture %>
+      </div>
+      <div>
+        最寄り駅：<%= @request.station %>
+      </div>
+      <div>
+        <p class="mb-0">内容：<%= @request.content %></p>
+      </div>
+      <div class="row">
+        <% if current_user == @request.user %>
+          <%= link_to "Delete", @request, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+        <% end %>
+      </div>
+    </div>
+  </li>
+</ul>
