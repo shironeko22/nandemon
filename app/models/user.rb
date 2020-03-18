@@ -6,4 +6,10 @@ class User < ApplicationRecord
   has_secure_password
   
   has_many :requests
+  has_many :messages
+  has_many :oubos, through: :messages, source: :request
+  
+  def oubo(a_req)
+    self.messages.create(request_id: a_req.id)
+  end
 end

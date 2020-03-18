@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_03_124732) do
+ActiveRecord::Schema.define(version: 2020_03_18_040349) do
+
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "request_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_id"], name: "index_messages_on_request_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
 
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
@@ -21,6 +31,7 @@ ActiveRecord::Schema.define(version: 2020_03_03_124732) do
     t.datetime "updated_at", null: false
     t.string "prefecture"
     t.string "station"
+    t.integer "money"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
@@ -32,5 +43,7 @@ ActiveRecord::Schema.define(version: 2020_03_03_124732) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "messages", "requests"
+  add_foreign_key "messages", "users"
   add_foreign_key "requests", "users"
 end

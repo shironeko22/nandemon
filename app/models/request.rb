@@ -6,4 +6,6 @@ class Request < ApplicationRecord
   validates :online_or_offline, presence: true, length: { maximum: 1 }
   validates :prefecture, length: { maximum: 50 }
   validates :station, length: { maximum: 50 }
+  
+  has_many :messages, dependent: :delete_all
 end

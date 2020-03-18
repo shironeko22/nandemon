@@ -31,7 +31,11 @@ class RequestsController < ApplicationController
   private
 
   def request_params
-    params.require(:request).permit(:title, :content, :online_or_offline, :prefecture, :station)
+    params.require(:request).permit(:title, :content, :online_or_offline, :prefecture, :station, :money)
+  end
+  
+  def message_params
+    params.require(:message).permit(:content)
   end
   
   def correct_user
