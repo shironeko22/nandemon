@@ -1,0 +1,18 @@
+<table class="table">
+  <tr>
+    <th><%= '依頼タイトル' %></th>
+    <th><%= '応募コメント' %></th>
+    <th><%= '応募ユーザ名' %></th>
+    <th><%= '応募ユーザメール' %></th>
+    <th><%= '詳細' %></th>
+  </tr>
+  <% @messages.each do |message| %>
+    <tr>
+      <td><%= message.request.title %></td>
+      <td><%= message.content %></td>
+      <td><%= message.user.name %></td>
+      <td><%= message.user.email %></td>
+      <td><%= link_to '詳細', message_path(message), class: 'btn btn-primary btn-block' %></td>
+    </tr>
+  <% end %>
+</table>

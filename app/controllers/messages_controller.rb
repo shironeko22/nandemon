@@ -1,8 +1,10 @@
 class MessagesController < ApplicationController
   def index
+    @messages = Message.where(request_id: current_user.requests)
   end
 
   def show
+    @message = Message.find_by(id: params[:id])
   end
 
   def create
