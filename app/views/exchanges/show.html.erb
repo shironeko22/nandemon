@@ -13,5 +13,9 @@
 </ul>
 
 <% unless @exchange.request.agreement %>
-  <%= button_to '依頼を受ける', {controller: 'requests', action: 'agree'}, class: 'btn btn-primary btn-block', data: {confirm: "この依頼をうけますか？"} %>
+  <%= button_to '依頼を受ける', {controller: 'requests', action: 'agree', request_id: @exchange.request_id}, class: 'btn btn-primary btn-block', data: {confirm: "この依頼をうけますか？"} %>
+<% end %>
+
+<% if exchange.request.user == current_user %>
+  <%#= link_to '振り込み', payment_path %>
 <% end %>

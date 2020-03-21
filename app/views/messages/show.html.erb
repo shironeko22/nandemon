@@ -12,12 +12,16 @@
   </li>
 </ul>
 
-<%= form_with(model: @exchange, local: true) do |f| %>
-  <%= f.hidden_field :request_id, :value => @message.request_id %>
-  <div class="form-group">
-    <%= f.label :content, 'メッセージ' %>
-    <%= f.text_area :content, class: 'form-control' %>
-  </div>
+<% unless @message.request.exchanges.present? %>
+  <%= form_with(model: @exchange, local: true) do |f| %>
+    <%= f.hidden_field :request_id, :value => @message.request_id %>
+    <div class="form-group">
+      <%= f.label :content, 'メッセージ' %>
+      <%= f.text_area :content, class: 'form-control' %>
+    </div>
 
-  <%= f.submit 'この人に依頼する', class: 'btn btn-primary btn-block', data: {confirm: "この内容で依頼しますか？"} %>
+    <%= f.submit 'この人に依頼する', class: 'btn btn-primary btn-block', data: {confirm: "この内容で依頼しますか？"} %>
+  <% end %>
+<% else %>
+  <%= 'すでに依頼済みです' %>
 <% end %>
