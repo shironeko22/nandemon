@@ -1,4 +1,4 @@
-<h1>依頼詳細</h1>
+<h1>応募詳細</h1>
 <ul class="list-unstyled">
   <li class="media mb-3">
     <div class="media-body">
@@ -11,3 +11,13 @@
     </div>
   </li>
 </ul>
+
+<%= form_with(model: @exchange, local: true) do |f| %>
+  <%= f.hidden_field :request_id, :value => @message.request_id %>
+  <div class="form-group">
+    <%= f.label :content, 'メッセージ' %>
+    <%= f.text_area :content, class: 'form-control' %>
+  </div>
+
+  <%= f.submit 'この人に依頼する', class: 'btn btn-primary btn-block', data: {confirm: "この内容で依頼しますか？"} %>
+<% end %>

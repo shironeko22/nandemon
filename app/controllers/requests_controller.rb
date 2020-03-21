@@ -29,6 +29,12 @@ class RequestsController < ApplicationController
     redirect_to root_url
   end
 
+  def agree
+    @request = Request.find_by(id: params[:id])
+    @request.update_attribute(:agreement, true)
+    redirect_to exchanges_path, notice: '依頼を受けました'
+  end
+
   private
 
   def request_params

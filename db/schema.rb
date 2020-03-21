@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_040349) do
+ActiveRecord::Schema.define(version: 2020_03_21_012421) do
+
+  create_table "exchanges", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "request_id"
+    t.text "content"
+    t.boolean "finish", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_id"], name: "index_exchanges_on_request_id"
+    t.index ["user_id"], name: "index_exchanges_on_user_id"
+  end
 
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -32,6 +43,7 @@ ActiveRecord::Schema.define(version: 2020_03_18_040349) do
     t.string "prefecture"
     t.string "station"
     t.integer "money"
+    t.boolean "agreement", default: false, null: false
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
@@ -43,6 +55,8 @@ ActiveRecord::Schema.define(version: 2020_03_18_040349) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "exchanges", "requests"
+  add_foreign_key "exchanges", "users"
   add_foreign_key "messages", "requests"
   add_foreign_key "messages", "users"
   add_foreign_key "requests", "users"
