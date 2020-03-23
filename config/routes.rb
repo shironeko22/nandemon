@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     member do
       get :comes
       post :agree
+      get :payment
     end
   end
 
@@ -25,4 +26,5 @@ Rails.application.routes.draw do
 
   resources :messages, only: [:index, :show, :create, :destroy]
   resources :exchanges, only: [:index, :show, :create, :destroy]
+  resources :charges
 end
