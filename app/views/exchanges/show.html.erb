@@ -12,7 +12,7 @@
   </li>
 </ul>
 
-<% unless @exchange.request.agreement %>
+<% if @exchange.request.user != current_user && !@exchange.request.agreement %>
   <%= button_to '依頼を受ける', {controller: 'requests', action: 'agree', request_id: @exchange.request_id}, class: 'btn btn-primary btn-block', data: {confirm: "この依頼をうけますか？"} %>
 <% end %>
 
@@ -23,12 +23,12 @@
 <% end %>
 
 <% if @exchange.request.user != current_user && @exchange.request.agreement && @exchange.request.payment && @exchange.request.status != 'confirm' %>
-  <%= link_to '完了報告', new_report_request_path(@exchange.request), class: 'btn btn-primary btn-block' %>
+  <%= link_to '完了報告ページへ', new_report_request_path(@exchange.request) %>
 <% end %>
 
 <% if @exchange.request.user == current_user && @exchange.request.agreement && @exchange.request.payment && @exchange.request.status == 'confirm' %>
-  <%= link_to '完了', finish_request_path(@exchange.request), class: 'btn btn-primary btn-block' %>
-  <%= link_to '修正依頼', modification_request_path(@exchange.request), class: 'btn btn-primary btn-block' %>
+  <%= button_to '完了', finish_request_path(@exchange.request), class: 'btn btn-primary btn-block' %>
+  <%= button_to '修正依頼', modification_request_request_path(@exchange.request), class: 'btn btn-primary btn-block' %>
 <% end %>
 
 

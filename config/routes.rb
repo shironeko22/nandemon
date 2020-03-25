@@ -18,8 +18,7 @@ Rails.application.routes.draw do
       post :agree
       get :new_report
       post :send_report
-      get :modification
-      post :send_modification
+      post :modification_request
       post :finish
     end
   end
