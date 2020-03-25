@@ -55,24 +55,20 @@ class RequestsController < ApplicationController
     end
   end
 
-  def modification
+  def modification_request
     @request = Request.find_by(id: params[:id])
-    @exchange = Exchange.new
+    @request.update_attribute(:status, 'revise')
+    flash[:success] = '修正依頼を送信しました。'
+    redirect_to exchanges_path
   end
 
-  def send_modification
-    @exchange = Exchange.new(exchange_params)
-    @exchange.user_id = current_user.id
-    if @exchange.save
-      @exchange.request.update_attribute(:status, 'confirm')
-      flash[:success] = '修正完了報告しました。'
-      redirect_to root_url
-    else
-      @exchange = current_user.exchanges.order(id: :desc).page(params[:page])
-      flash.now[:danger] = '修正完了報告に失敗しました。'
-      render 'requests/modification'
-    end
+  def finish
+    @request = Request.find_by(id: params[:id])
+    @request.update_attribute(:status, 'complete')
+    flash[:success] = 'やりとりが完了しました。'
+    redirect_to root_path
   end
+
 
   private
 
