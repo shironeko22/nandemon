@@ -6,7 +6,7 @@
         <%= @exchange.user.name %> <span class="text-muted">posted at <%= @exchange.created_at %></span>
       </div>
       <div>
-        応募内容：<%= @exchange.content %>
+        コメント内容：<%= @exchange.content %>
       </div>
     </div>
   </li>
@@ -21,3 +21,14 @@
     <%= link_to '振り込み', new_charge_path(request_id: @exchange.request_id), class: 'btn btn-primary btn-block' %>
   <% end %>
 <% end %>
+
+<% if @exchange.request.user != current_user && @exchange.request.agreement && @exchange.request.payment && @exchange.request.status != 'confirm' %>
+  <%= link_to '完了報告', new_report_request_path(@exchange.request), class: 'btn btn-primary btn-block' %>
+<% end %>
+
+<% if @exchange.request.user == current_user && @exchange.request.agreement && @exchange.request.payment && @exchange.request.status == 'confirm' %>
+  <%= link_to '完了', finish_request_path(@exchange.request), class: 'btn btn-primary btn-block' %>
+  <%= link_to '修正依頼', modification_request_path(@exchange.request), class: 'btn btn-primary btn-block' %>
+<% end %>
+
+

@@ -1,6 +1,7 @@
 class ExchangesController < ApplicationController
   def index
-    @exchanges = Exchange.order(:id)
+    @exchanges = Exchange.order(created_at: :desc)
+    # @requests = Request.joins(:exchanges).where(user_id: current_user.id)
   end
 
   def show

@@ -36,6 +36,44 @@ class RequestsController < ApplicationController
     redirect_to exchanges_path
   end
 
+  def new_report
+    @request = Request.find_by(id: params[:id])
+    @exchange = Exchange.new
+  end
+
+  def send_report
+    @exchange = Exchange.new(exchange_params)
+    @exchange.user_id = current_user.id
+    if @exchange.save
+      @exchange.request.update_attribute(:status, 'confirm')
+      flash[:success] = '完了報告しました。'
+      redirect_to root_url
+    else
+      @exchange = current_user.exchanges.order(id: :desc).page(params[:page])
+      flash.now[:danger] = '完了報告に失敗しました。'
+      render 'requests/new_report'
+    end
+  end
+
+  def modification
+    @request = Request.find_by(id: params[:id])
+    @exchange = Exchange.new
+  end
+
+  def send_modification
+    @exchange = Exchange.new(exchange_params)
+    @exchange.user_id = current_user.id
+    if @exchange.save
+      @exchange.request.update_attribute(:status, 'confirm')
+      flash[:success] = '修正完了報告しました。'
+      redirect_to root_url
+    else
+      @exchange = current_user.exchanges.order(id: :desc).page(params[:page])
+      flash.now[:danger] = '修正完了報告に失敗しました。'
+      render 'requests/modification'
+    end
+  end
+
   private
 
   def request_params
@@ -44,6 +82,10 @@ class RequestsController < ApplicationController
 
   def message_params
     params.require(:message).permit(:content)
+  end
+
+  def exchange_params
+    params.require(:exchange).permit(:content, :request_id)
   end
 
   def correct_user

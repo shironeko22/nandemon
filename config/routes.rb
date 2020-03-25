@@ -16,7 +16,11 @@ Rails.application.routes.draw do
     member do
       get :comes
       post :agree
-      get :payment
+      get :new_report
+      post :send_report
+      get :modification
+      post :send_modification
+      post :finish
     end
   end
 

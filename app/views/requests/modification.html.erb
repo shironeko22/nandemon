@@ -1,0 +1,13 @@
+<h1>修正依頼</h1>
+
+依頼タイトル：<%= @request.title %>
+
+<%= form_with(model: @exchange, url: send_report_request_path(@request), local: true) do |f| %>
+  <%= f.hidden_field :request_id, :value => @request.id %>
+  <div class="form-group">
+    <%= f.label :content, 'メッセージ' %>
+    <%= f.text_area :content, class: 'form-control' %>
+  </div>
+
+  <%= f.submit '完了報告', class: 'btn btn-primary btn-block', data: {confirm: "この内容で完了報告をしますか？"} %>
+<% end %>
