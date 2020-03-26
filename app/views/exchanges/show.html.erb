@@ -1,0 +1,34 @@
+<h1>応募詳細</h1>
+<ul class="list-unstyled">
+  <li class="media mb-3">
+    <div class="media-body">
+      <div>
+        <%= @exchange.user.name %> <span class="text-muted">posted at <%= @exchange.created_at %></span>
+      </div>
+      <div>
+        コメント内容：<%= @exchange.content %>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<% if @exchange.request.user != current_user && !@exchange.request.agreement %>
+  <%= button_to '依頼を受ける', {controller: 'requests', action: 'agree', request_id: @exchange.request_id}, class: 'btn btn-primary btn-block', data: {confirm: "この依頼をうけますか？"} %>
+<% end %>
+
+<% unless @exchange.request.payment %>
+  <% if @exchange.request.user == current_user && @exchange.request.agreement %>
+    <%= link_to '振り込み', new_charge_path(request_id: @exchange.request_id), class: 'btn btn-primary btn-block' %>
+  <% end %>
+<% end %>
+
+<% if @exchange.request.user != current_user && @exchange.request.agreement && @exchange.request.payment && @exchange.request.status != 'confirm' %>
+  <%= link_to '完了報告ページへ', new_report_request_path(@exchange.request) %>
+<% end %>
+
+<% if @exchange.request.user == current_user && @exchange.request.agreement && @exchange.request.payment && @exchange.request.status == 'confirm' %>
+  <%= button_to '完了', finish_request_path(@exchange.request), class: 'btn btn-primary btn-block' %>
+  <%= button_to '修正依頼', modification_request_request_path(@exchange.request), class: 'btn btn-primary btn-block' %>
+<% end %>
+
+

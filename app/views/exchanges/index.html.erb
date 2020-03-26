@@ -1,0 +1,22 @@
+<table class="table">
+  <tr>
+    <th><%= '依頼タイトル' %></th>
+    <th><%= 'コメント' %></th>
+    <th><%= '応募ユーザ名' %></th>
+    <th><%= '応募ユーザメール' %></th>
+    <th><%= '詳細' %></th>
+  </tr>
+  <% exchanges = [] %>
+  <% @exchanges.each do |exchange| %>
+    <% unless exchanges.member?(exchange.request_id) %>
+      <% exchanges << exchange.request_id %>
+      <tr>
+        <td><%= exchange.request.title %></td>
+        <td><%= exchange.content %></td>
+        <td><%= exchange.user.name %></td>
+        <td><%= exchange.user.email %></td>
+        <td><%= link_to '詳細', exchange_path(exchange), class: 'btn btn-primary btn-block' %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

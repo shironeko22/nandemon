@@ -17,6 +17,9 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+ENV['PUBLISHABLE_KEY'] = "pk_test_fCw3mddRPNKDU5ncKjHjvdFU00yj6AEOQM"
+ENV['SECRET_KEY'] = "sk_test_vqqGNho6VPzU97kHmZ5UfCTK00oiXpbQXU"
+
 module Nandemon
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

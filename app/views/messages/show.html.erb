@@ -1,0 +1,27 @@
+<h1>応募詳細</h1>
+<ul class="list-unstyled">
+  <li class="media mb-3">
+    <div class="media-body">
+      <div>
+        <%= @message.user.name %> <span class="text-muted">posted at <%= @message.created_at %></span>
+      </div>
+      <div>
+        応募内容：<%= @message.content %>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<% unless @message.request.exchanges.present? %>
+  <%= form_with(model: @exchange, local: true) do |f| %>
+    <%= f.hidden_field :request_id, :value => @message.request_id %>
+    <div class="form-group">
+      <%= f.label :content, 'メッセージ' %>
+      <%= f.text_area :content, class: 'form-control' %>
+    </div>
+
+    <%= f.submit 'この人に依頼する', class: 'btn btn-primary btn-block', data: {confirm: "この内容で依頼しますか？"} %>
+  <% end %>
+<% else %>
+  <%= 'すでに依頼済みです' %>
+<% end %>
