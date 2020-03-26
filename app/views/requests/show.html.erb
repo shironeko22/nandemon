@@ -9,7 +9,7 @@
         タイトル：<%= @request.title %>
       </div>
       <div>
-        金額：<%= @request.money %>
+        金額：<%= @request.money %>円
       </div>
       <div>
         県・市区：<%= @request.prefecture %>
@@ -31,3 +31,4 @@
     </div>
   </li>
 </ul>
+<%= link_to '戻る', :back, class: 'btn btn-primary btn-sm' %>
