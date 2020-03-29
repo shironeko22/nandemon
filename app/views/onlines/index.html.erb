@@ -1,10 +1,10 @@
-<h1>オンライン一覧</h1>
+<h1>オンライン一覧 (全<%= Request.where(online_or_offline: "0").count %>件)</h1>
 <ul class="list-unstyled">
   <% @requests.each do |req| %>
     <li class="media mb-3">
       <div class="media-body" style="padding: 2px 20px 5px; border: 1px solid #333333;">
         <div>
-          <%= req.user.name %> <span class="text-muted">posted at <%= req.created_at %></span>
+          <%= req.user.name %> <span class="text-muted">投稿日時:<%= req.created_at.to_s(:datetime_jp) %></span>
         </div>
         <div>
           タイトル：<%= req.title %>

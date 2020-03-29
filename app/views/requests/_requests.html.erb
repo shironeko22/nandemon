@@ -1,12 +1,12 @@
-<h1>依頼一覧</h1>
+<h1>依頼一覧 (全<%= Request.count %>件)</h1>
 <ul class="list-unstyled">
   <% users.each do |user| %>
     <% requests = user.requests.order(id: :desc).page(params[:page]) %>
     <% requests.each do |req| %>
       <li class="media mb-3">
-        <div class="media-body" style="padding: 2px 20px 5px; border: 1px solid #333333;">
+        <div class="media-body" style="padding: 2px 15px 5px; border: 1px solid #333333;">
           <div>
-            <%= req.user.name %> <span class="text-muted">posted at <%= req.created_at %></span>
+            <%= req.user.name %> <span class="text-muted">投稿日時:<%= req.created_at.to_s(:datetime_jp) %></span>
           </div>
           <div>
             タイトル：<%= req.title %>
@@ -19,7 +19,7 @@
               県・市区：<%= req.prefecture %>
             </div>
           <% end %>
-          <div class="row">
+          <div class="row pl-2">
             <% if current_user == req.user %>
               <%= link_to "Delete",req, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
             <% end %>

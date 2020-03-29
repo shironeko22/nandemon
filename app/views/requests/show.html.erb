@@ -3,28 +3,52 @@
   <li class="media mb-3">
     <div class="media-body">
       <div>
-        <%= @request.user.name %> <span class="text-muted">posted at <%= @request.created_at %></span>
+        <%= @request.user.name %> <span class="text-muted">投稿日時:<%= @request.created_at.to_s(:datetime_jp) %></span>
       </div>
-      <div>
-        タイトル：<%= @request.title %>
-      </div>
-      <div>
-        金額：<%= @request.money %>円
-      </div>
-      <div>
-        県・市区：<%= @request.prefecture %>
-      </div>
-      <div>
-        最寄り駅：<%= @request.station %>
-      </div>
-      <div>
-        <p class="mb-0">内容：<%= @request.content %></p>
+      <div class="container">
+        <div class="row">
+          <div class="p-0 col-3 col-sm-2 col-md-2 col-lg-1">
+            タイトル：
+          </div>
+          <div class="p-0 col-9 col-sm-10 col-md-10 col-lg-11">
+            <%= @request.title %>
+          </div>
+          <div class="p-0 col-3 col-sm-2 col-md-2 col-lg-1">
+            金額：
+          </div>
+          <div class="p-0 col-9 col-sm-10 col-md-10 col-lg-11">
+            <%= @request.money %>円
+          </div>
+          <% if @request.online_or_offline == "1" %>
+            <div class="p-0 col-3 col-sm-2 col-md-2 col-lg-1">
+              県・市区：
+            </div>
+            <div class="p-0 col-9 col-sm-10 col-md-10 col-lg-11">
+              <%= @request.prefecture %>
+            </div>
+            <div class="p-0 col-3 col-sm-2 col-md-2 col-lg-1">
+              最寄り駅：
+            </div>
+            <div class="p-0 col-9 col-sm-10 col-md-10 col-lg-11">
+              <%= @request.station %>
+            </div>
+          <% end %>
+          <div class="p-0 col-3 col-sm-2 col-md-2 col-lg-1">
+            内容：
+          </div>
+          <div class="p-0 col-9 col-sm-10 col-md-10 col-lg-11">
+            <%= @request.content %>
+          </div>
+        </div>
       </div>
       <div class="row">
         <% if current_user == @request.user %>
           <%= link_to "Delete", @request, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
         <% end %>
       </div>
+      <% unless logged_in? %>
+        <%= link_to "ログインしてこの依頼に応募する", login_path, class: 'btn btn-primary btn-sm' %>
+      <% end %>
       <% if logged_in? && @request.user != current_user %>
         <%= render 'messages/new_messages', request: @request %>
       <% end %>

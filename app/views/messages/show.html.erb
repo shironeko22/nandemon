@@ -1,9 +1,9 @@
-<h1>応募詳細</h1>
+<h1>応募者詳細</h1>
 <ul class="list-unstyled">
   <li class="media mb-3">
     <div class="media-body">
       <div>
-        <%= @message.user.name %> <span class="text-muted">posted at <%= @message.created_at %></span>
+        <%= @message.user.name %> <span class="text-muted">投稿日時:<%= @message.created_at.to_s(:datetime_jp) %></span>
       </div>
       <div>
         応募内容：<%= @message.content %>
@@ -23,5 +23,6 @@
     <%= f.submit 'この人に依頼する', class: 'btn btn-primary btn-block', data: {confirm: "この内容で依頼しますか？"} %>
   <% end %>
 <% else %>
-  <%= 'すでに依頼済みです' %>
+  <p style="font-weight: 700; color: red;"><%= 'すでに依頼済みです' %></p>
 <% end %>
+<p><%= link_to '戻る', :back, class: 'btn btn-primary btn-sm' %></p>

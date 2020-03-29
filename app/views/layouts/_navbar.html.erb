@@ -21,9 +21,11 @@
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">メニュー</a>
             <ul class="dropdown-menu dropdown-menu-right">
-              <li class="dropdown-item"><%= link_to 'オンライン(ネット完結する仕事)', online_path %></li>
+              <li class="dropdown-item"><%= link_to '全依頼一覧', root_path %>　<span class="badge badge-secondary"><%= Request.count %></span></li>
               <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to 'オフライン(会う必要がある仕事)', offline_path %></li>
+              <li class="dropdown-item"><%= link_to 'オンライン(ネット完結する仕事)', online_path %>　<span class="badge badge-secondary"><%= Request.where(online_or_offline: "0").count %></span></li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-item"><%= link_to 'オフライン(会う必要がある仕事)', offline_path %>　<span class="badge badge-secondary"><%= Request.where(online_or_offline: "1").count %></span></li>
               <li class="dropdown-divider"></li>
               <li class="dropdown-item"><%= link_to '依頼する', new_request_path %></li>
             </ul>
@@ -34,9 +36,11 @@
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">メニュー</a>
             <ul class="dropdown-menu dropdown-menu-right">
-              <li class="dropdown-item"><%= link_to 'オンライン(ネット完結する仕事)', online_path %></li>
+              <li class="dropdown-item"><%= link_to '全依頼一覧', root_path %>　<span class="badge badge-secondary"><%= Request.count %></span></li>
               <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to 'オフライン(会う必要がある仕事)', offline_path %></li>
+              <li class="dropdown-item"><%= link_to 'オンライン(ネット完結する仕事)', online_path %>　<span class="badge badge-secondary"><%= Request.where(online_or_offline: "0").count %></span></li>
+              <li class="dropdown-divider"></li>
+              <li class="dropdown-item"><%= link_to 'オフライン(会う必要がある仕事)', offline_path %>　<span class="badge badge-secondary"><%= Request.where(online_or_offline: "1").count %></span></li>
             </ul>
           </li>
         <% end %>

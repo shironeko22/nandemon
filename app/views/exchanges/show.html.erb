@@ -1,9 +1,9 @@
-<h1>応募詳細</h1>
+<h1>やりとり詳細</h1>
 <ul class="list-unstyled">
   <li class="media mb-3">
     <div class="media-body">
       <div>
-        <%= @exchange.user.name %> <span class="text-muted">posted at <%= @exchange.created_at %></span>
+        <%= @exchange.user.name %> <span class="text-muted">投稿日時:<%= @exchange.created_at.to_s(:datetime_jp) %></span>
       </div>
       <div>
         コメント内容：<%= @exchange.content %>
@@ -30,5 +30,5 @@
   <%= button_to '完了', finish_request_path(@exchange.request), class: 'btn btn-primary btn-block' %>
   <%= button_to '修正依頼', modification_request_request_path(@exchange.request), class: 'btn btn-primary btn-block' %>
 <% end %>
-
+<%= link_to '戻る', :back, class: 'btn btn-primary btn-sm' %>
 
