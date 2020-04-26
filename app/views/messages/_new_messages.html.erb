@@ -1,6 +1,6 @@
 <%= form_with(model: @message, local: true) do |f| %>
   <%= f.hidden_field :request_id, :value => @request.id %>
-  <div class="form-group">
+  <div class="form-group" style="font-weight: 700; padding: 10px 15px 0;">
     <%= f.label :content, 'メッセージ' %>
     <%= f.text_area :content, class: 'form-control' %>
   </div>

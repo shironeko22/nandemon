@@ -1,7 +1,7 @@
 <h1>依頼詳細</h1>
 <ul class="list-unstyled">
   <li class="media mb-3">
-    <div class="media-body">
+    <div class="media-body" style="padding: 2px 4px 5px; border: 1px solid #333;">
       <div>
         <%= @request.user.name %> <span class="text-muted">投稿日時:<%= @request.created_at.to_s(:datetime_jp) %></span>
       </div>
@@ -41,7 +41,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row ml-0">
         <% if current_user == @request.user %>
           <%= link_to "Delete", @request, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
         <% end %>

@@ -4,21 +4,23 @@
     <% requests = user.requests.order(id: :desc).page(params[:page]) %>
     <% requests.each do |req| %>
       <li class="media mb-3">
-        <div class="media-body" style="padding: 2px 15px 5px; border: 1px solid #333333;">
+        <div class="media-body" style="padding: 2px 8px 5px; border: 1px solid #333333;">
           <div>
             <%= req.user.name %> <span class="text-muted">投稿日時:<%= req.created_at.to_s(:datetime_jp) %></span>
           </div>
-          <div>
-            タイトル：<%= req.title %>
-          </div>
-          <div>
-            金額：<%= req.money %>円
-          </div>
-          <% if req.online_or_offline == "1" %>
+          <div style="margin-left: 6px;">
             <div>
-              県・市区：<%= req.prefecture %>
+              タイトル：<%= req.title %>
             </div>
-          <% end %>
+            <div>
+              金額：<%= req.money %>円
+            </div>
+            <% if req.online_or_offline == "1" %>
+              <div>
+                県・市区：<%= req.prefecture %>
+              </div>
+            <% end %>
+          </div>
           <div class="row pl-2">
             <% if current_user == req.user %>
               <%= link_to "Delete",req, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
