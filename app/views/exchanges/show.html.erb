@@ -1,12 +1,19 @@
 <h1>やりとり詳細</h1>
 <ul class="list-unstyled">
   <li class="media mb-3">
-    <div class="media-body">
+    <div class="media-body" style="padding: 2px 4px 5px; border: 1px solid #333;">
       <div>
         <%= @exchange.user.name %> <span class="text-muted">投稿日時:<%= @exchange.created_at.to_s(:datetime_jp) %></span>
       </div>
-      <div>
-        コメント内容：<%= @exchange.content %>
+      <div class="container">
+        <div class="row">
+          <div class="p-0 col-3 col-sm-2 col-md-2 col-lg-1">
+            コメント：
+          </div>
+          <div class="p-0 col-9 col-sm-10 col-md-10 col-lg-11">
+            <%= @exchange.content %>
+          </div>
+        </div>
       </div>
     </div>
   </li>

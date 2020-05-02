@@ -17,7 +17,6 @@ class RequestsController < ApplicationController
       flash[:success] = '依頼を投稿しました。'
       redirect_to root_url
     else
-      @request = current_user.requests.order(id: :desc).page(params[:page])
       flash.now[:danger] = '依頼の投稿に失敗しました。'
       render 'requests/new'
     end
